@@ -1,0 +1,13 @@
+celery==4.1.1
+Django==1.11.12
+django-cors-headers==2.2.0
+django-storages==1.6.6
+Pillow==5.0.0
+psycopg2==2.7.4
+psycopg2-binary==2.7.4
+pytz==2018.4
+redis==2.10.6
+requests==2.18.4
+TinyUrl==0.1.0
+xlsxwriter
+six==1.11.0
