@@ -1,6 +1,4 @@
-<html>
-
-<head>
+{% block nav %}
     <style type="text/css" rel="stylesheet" media="all">
     *, *:before, *:after {
     -moz-box-sizing: border-box;
@@ -55,6 +53,11 @@
     input[type="radio"],
     input[type="checkbox"] {
     margin: 0 4px 8px 0;
+    }
+    h3 {
+    margin: 0 0 30px 0;
+    text-align: center;
+    color: f2243c
     }
 
     select {
@@ -141,13 +144,14 @@
     <link href='https://fonts.googleapis.com/css?family=Nunito:400,300' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="css/main.css">
 
-</head>
+
 
 <body>
 
-    <form action="index.html" method="post">
+    <form action="/users/signup/process/" method="post">
 
         <h1>Sign Up</h1>
+        <h3>{{message}}</h3>
 
         <fieldset>
             <legend><span class="number">1</span>Your basic info</legend>
@@ -171,6 +175,4 @@
     </form>
 
 
-</body>
-
-</html>
+{% endblock %}

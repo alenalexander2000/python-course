@@ -25,6 +25,11 @@
     margin: 0 0 30px 0;
     text-align: center;
     }
+    h3 {
+    margin: 0 0 30px 0;
+    text-align: center;
+    color: f2243c
+    }
 
     input[type="text"],
     input[type="password"],
@@ -145,9 +150,13 @@
 
 <body>
 
-    <form action="index.html" method="post">
+    <form action="/users/signin/process/" method="post">
 
-        <h1>Sign Up</h1>
+        <h1>Sign In</h1>
+
+        <h3 color=>{{message}}</h3>
+
+
 
         <fieldset>
             <legend><span class="number">1</span>Your basic info</legend>
@@ -161,9 +170,8 @@
         </fieldset>
 
         <button type="submit">Sign In</button>
-        <fieldset>
-        <a class="button" href="/users/signup/"> Signup</a>
-    </fieldset>
+            <br>
+        <button  href="/users/signup/"> Signup</button>
     </form>
 
 
