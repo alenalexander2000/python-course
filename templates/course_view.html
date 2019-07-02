@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block nav %}
+
+<h2> courses list</h2>
+<br>
+<ul>
+{% for course in courses  %}
+
+<div class="card" style="width: 18rem;">
+    <img src="/media/{{course.image}}" class="card-img-top" alt="...">
+    <div class="card-body">
+        <h5 class="card-title">{{course.name}}</h5>
+        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
+            content.</p>
+    </div>
+    <div class="card-body">
+        <a href="/course/{{course.id}}/topics/" class="card-link">Start Course</a>
+    </div>
+</div>
+
+{% endfor %}
+
+{% endblock %}
+
+

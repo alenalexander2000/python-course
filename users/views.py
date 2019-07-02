@@ -35,6 +35,9 @@ from django.contrib import messages
 from .models import *
 from django.contrib.auth import authenticate
 
+from hashlib import sha512
+from uuid import uuid4
+
 # Create your views here.
 def signup_page(request):
     """
@@ -57,8 +60,9 @@ def loginprocess(request):
     user_dict['request'] = request
     user = verify_user_credentials(user_dict)
     request.session['accesstoken'] = user.access_token
+    request.session['username'] = user.user.first_name
 
-    return render(request, 'home.html', {'message' : ''  })
+    return redirect('/')
 
 
 def verify_user_credentials(user_dict):
@@ -88,40 +92,73 @@ def verify_user_credentials(user_dict):
 
 def signupprocess(request):
     data = request.POST
-    name = data.get('name')
-    phone = data.get('mobile')
-    phone = data.get('email')
-    phone = data.get('password')
+    name = data.get('username')
+    mobile = data.get('mobile')
+    email = data.get('email')
+    password = data.get('password')
 
-    val=1
-    batch = Batch.objects.all()
-    for i in batch:
-        if(i.cbid == cbid): val=0;break
-    dict = {'name' : name , 'batch': batch , 'phonenumber' : cbid,'cbid' : phone,'adm_no' : adm_no, 'message' : 'Error'}
-    if(password == '' or  password.__len__() >= 100 or password.__len__() <= 7):
-        dict['signupmessage'] = "Enter a valid password ** It should contain more than 7 charecters ** "
-        return render(request,'list/login.html',dict)
-    elif(name == ''):
-        dict['signupmessage'] = "Enter a valid name"
-        return render(request,'list/login.html',dict)
-    elif(adm_no == '' ):
-        dict['signupmessage'] = "Enter a valid admission number"
-        return render(request,'list/login.html',dict)
-    elif(val==1):
-        dict['signupmessage']="enter a valid course/class"
-    '''try:
-        phone = int(phone)
-    except Exception, e:
-        dict['signupmessage'] = "Enter a valid phone number"
-        return render(request,'list/login.html',dict)'''
-    data = User.objects.all()
-    email_check = User.objects.all().filter(adm_no = adm_no)
-    for y in email_check :
-        dict['signupmessage'] = "This adm_no is already in use . Please try again with another adm_no "
-        return render(request,'list/login.html',dict)
-    request.session['logid'] = adm_no
+    user_dict = {
+        'name':name,
+        'mobile': mobile,
+        'email': email,
+        'password': password,
+    }
+    user = create_custom_user(user_dict)
+    request.session['accesstoken'] = user.access_token
+    request.session['username'] = user.user.first_name
+
+    return redirect('/')
 
 
-    p = User(name = name,password=password,adm_no=adm_no,phone_no =phone,cbid=i)
-    p.save()
-    return render(request, 'list/login.html' , {'message' : " Signup Completed Please check Email and Login to continue "})
+def create_custom_user(user_dict):
+    """
+    Function to create Custom user object.
+
+    Input Params:
+        user_dict(dict): Collection obj with,
+            user(obj): django user.
+    Returns:
+         (obj): User object
+    """
+    user_dict['user'] = create_djago_user(user_dict)
+    user_dict['access_token'] = _generate_key(90)
+    user = CustomUser.objects.create(
+        user=user_dict['user'],
+        access_token=user_dict['access_token'],
+        phone=user_dict['mobile']
+    )
+    return (user)
+
+
+def create_djago_user(user_dict):
+    """
+    Function to create Django user.
+
+    Input Params:
+        user_dict(dict): Collection obj with,
+            name (char): First name of the user
+            email (char): valid email id of the user
+            password (char): password of the user
+    Returns:
+        (obj): User object
+    """
+    user_dict['username'] = user_dict['email'].lower()
+    user = User.objects.create_user(
+        user_dict['username'],
+        user_dict['email'],
+        user_dict['password'])
+    user.first_name = user_dict['name']
+    user.save()
+    user.set_password(user_dict['password'])
+    user.save()
+    return (user)
+
+
+def _generate_key(length):
+    """
+    Function to generate a key.
+
+    the following parameters is to be passed.
+    :param str length: length of key
+    """
+    return sha512(uuid4().hex).hexdigest()[:length]
