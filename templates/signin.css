@@ -1,8 +1,4 @@
-<html>
-
-<head>
-    <style type="text/css" rel="stylesheet" media="all">
-    *, *:before, *:after {
+*, *:before, *:after {
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
@@ -24,11 +20,6 @@
     h1 {
     margin: 0 0 30px 0;
     text-align: center;
-    }
-    h3 {
-    margin: 0 0 30px 0;
-    text-align: center;
-    color: f2243c
     }
 
     input[type="text"],
@@ -138,44 +129,3 @@
     }
 
     }
-    </style>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign Up Form</title>
-    <link rel="stylesheet" href="css/normalize.css">
-    <link href='https://fonts.googleapis.com/css?family=Nunito:400,300' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href="css/main.css">
-    <link rel="stylesheet" type="text/css" href="signin.css">
-
-</head>
-
-<body>
-
-    <form action="/users/signin/process/" method="post">
-
-        <h1>Sign In</h1>
-
-        <h3 color=>{{message}}</h3>
-
-
-
-        <fieldset>
-            <legend><span class="number">1</span>Your basic info</legend>
-
-            <label for="mail">Email:</label>
-            <input type="email" id="mail" name="email">
-
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password">
-
-        </fieldset>
-
-        <button type="submit">Sign In</button>
-            <br>
-        <button  href="/users/signup/"> Signup</button>
-    </form>
-
-
-</body>
-
-</html>
