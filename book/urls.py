@@ -15,5 +15,7 @@ urlpatterns = [
     
     url(r'^course/(?P<course_id>\d+)/topics/$', views.topic_list),
     url(r'^course/$', views.course_list),
+
+    url(r'^topic/(?P<topic_id>\d+)/view/$',views.content_list),
     # url(r'^', views.home,name='index'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

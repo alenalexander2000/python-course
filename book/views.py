@@ -34,7 +34,8 @@ from django.core.urlresolvers import reverse_lazy
 from django.utils import timezone
 from django.contrib import messages
 
-from . import dal 
+from . import dal
+from .constants import *
 
 
 from django.contrib.auth import authenticate
@@ -110,3 +111,45 @@ class ContentDelete (DeleteView):
     model = Content
     success_url = reverse_lazy('index')
 
+
+def content_list(request, topic_id):
+    """
+    """
+    topic = Topic.objects.get(id=topic_id)
+    # import ipdb; ipdb.set_trace()
+    contents = Content.objects.filter(topic=topic).order_by('position')
+    topics = Topic.objects.filter(course=topic.course).exclude(id=topic_id).order_by('position')
+    datas = contents
+    return render(request,
+    'content_view.html',
+    {'contents': contents,
+        'topics': topics,
+        'current_topic': topic,
+        'datas': datas})
+
+
+# def get_content_as_html(contents):
+#     data =''
+#     import ipdb; ipdb.set_trace()
+#     for content in contents:
+#         if int(content.content) ==TEXT:
+#             data += get_text_html(content)
+#         # elif int(content.content) == CODE:
+#         #     data += get_code_html(content)
+#         # elif int(content.content) == IMAGE:
+#         #     data += get_image_html(content)
+#         # elif int(content.content) == POINT:
+#         #     data += get_point_html(content)
+#         # elif int(content.content) == LINK:
+#         #     data += get_link_html(content)
+#         # elif int(content.content) == GRAPH:
+#         #     data += get_graph_html(content)
+#         # elif int(content.content) == TABLE:
+#         #     data += get_table_html(content)
+#         # elif int(content.content) == VIDEO:
+#         #     data += get_video_html(content)
+#     return data
+#
+#
+# def get_text_html(content):
+#     return('<pre><code>' + content.value +'</code></pre>')

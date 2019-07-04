@@ -35,6 +35,9 @@ class Course(models.Model):
     image = models.ImageField(
         upload_to=get_topic_image_path,
         null=True, default=None, blank=True)
+    def __unicode__(self):
+        """Object name in django admin."""
+        return '%s : %s' % (self.name, self.id)
 
 
 class Topic(models.Model):
@@ -63,7 +66,7 @@ class Content(models.Model):
 
     def get_absolute_url(self):
         return reverse('content', kwargs={'pk': self.id})
-    
+
     def __unicode__(self):
         """Object name in django admin."""
         return '%s : %s' % (self.position, self.topic.name)
@@ -94,4 +97,3 @@ class Suppliment(models.Model):
     def __unicode__(self):
         """Object name in django admin."""
         return '%s : %s' % (self.topic.name, self.id)
-
