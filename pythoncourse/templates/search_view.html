@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+
+{% block nav %}
+
+<div class="container">
+    {% for content in contents %}
+    <div class="row">
+
+        <div class="col-md-9">
+            <h5>{{content.topic.position}}. {{content.topic.name}}
+            {% if content.content == '1' %}
+                <p> {{content.value}} </p>
+            {% elif content.content == '2'%}
+                <div class="code">
+                    <pre>
+                        <code>
+                            {{content.value}}
+                        </code>
+                    </pre>
+                </div>
+            {% elif content.content == '3'%}
+                <img src="{{content.value}}"></img>
+            {% elif content.content == '4'%}
+                <h4> {{content.value}} </h4>
+            {% elif content.content == '5'%}
+                <a href="{{content.value}}">{{content.value}}</a>
+            {% elif content.content == '6'%}
+                <p>hey</p>
+            {% elif content.content == '7'%}
+                <p>hey</p>
+            {% elif content.content == '8'%}
+            <iframe width="420" height="315" src="{{content.value}}">
+            </iframe>
+            {% endif %}
+            {% if request.session.accesstoken == '90e013ff11c28ceaa465b3b193d507a37ffd162a4439997b367552b732987ec30de24f9d5beda46bd3eab1216b' %}
+                <a href='/content/{{content.id}}/update/'> update</a>
+                <a href='content/{{content.id}}/delete/'> delete</a>
+            {% endif %}
+
+
+        </div>
+
+    </div>
+    {% endfor %}
+    <div class="row">
+    {% for topic in topics  %}
+    <div class="card col-md-3" style="width: 18rem; margin: 2em; height: auto">
+        <img src="/media/{{topic.image}}" class="card-img-top span5 offset1" alt="..." style="padding: 1rem;">
+        <div class="card-body">
+            <h5 class="card-title">{{topic.position}}.  {{topic.name}}</h5>
+            <p class="card-text">{{topic.description}}.</p>
+        </div>
+        <div class="card-body">
+            {% if not topic.lock %}
+                <a href="#" class="card-link">Start Topic</a>
+                <i class="fa fa-lock" aria-hidden="false"></i>
+            {% else %}
+                <a href="/topic/{{topic.id}}/view/" class="btn btn-info">Start Topic</a>
+                    <i class="fa fa-lock" aria-hidden="True" style="margin: 1em">  Locked</i>
+            {% endif %}
+        </div>
+    </div>
+    <!-- <div class="col-md-1">
+    </div> -->
+    {% endfor %}
+    </div>
+
+</div>
+
+{% endblock %}
