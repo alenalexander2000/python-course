@@ -1,0 +1,5 @@
+-r base.txt
+Fabric==1.14.0
+keyring==11.0.0
+requests==2.18.4
+ipdb
