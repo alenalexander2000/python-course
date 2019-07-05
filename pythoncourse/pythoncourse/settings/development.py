@@ -6,12 +6,12 @@ from .base import *
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    'ec2-13-232-164-134.ap-south-1.compute.amazonaws.com',
+    'ec2-13-233-121-238.ap-south-1.compute.amazonaws.com',
     'course.soorajparakkattil.com',
 ]
 
 CORS_ORIGIN_WHITELIST = (
-    'ec2-13-232-164-134.ap-south-1.compute.amazonaws.com',
+    'ec2-13-233-121-238.ap-south-1.compute.amazonaws.com',
     'course.soorajparakkattil.com',
 )
 
@@ -23,7 +23,7 @@ CORS_ORIGIN_WHITELIST = (
 # djcelery.setup_loader()
 # BROKER_URL = 'django://'
 
-ROOT_URL = 'ec2-13-232-164-134.ap-south-1.compute.amazonaws.com'
+ROOT_URL = 'ec2-13-233-121-238.ap-south-1.compute.amazonaws.com'
 
 
 
