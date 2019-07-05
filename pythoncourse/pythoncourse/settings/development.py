@@ -17,7 +17,7 @@ CORS_ORIGIN_WHITELIST = (
 
 """Local Settings for cbsoft are specified here."""
 
-from .base import *
+
 # import djcelery
 
 # djcelery.setup_loader()
@@ -25,7 +25,7 @@ from .base import *
 
 ROOT_URL = 'ec2-13-232-164-134.ap-south-1.compute.amazonaws.com'
 
-# ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+
 
 DEBUG = True
 
@@ -46,12 +46,12 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
 # Redis setup for celery.
-BROKER_URL = 'redis://localhost:6379'
-CELERY_RESULT_BACKEND = 'redis://localhost:6379'
-CELERY_ACCEPT_CONTENT = ['application/json']
-CELERY_TASK_SERIALIZER = 'json'
-CELERY_RESULT_SERIALIZER = 'json'
-CELERY_TIMEZONE = 'UTC'
+# BROKER_URL = 'redis://localhost:6379'
+# CELERY_RESULT_BACKEND = 'redis://localhost:6379'
+# CELERY_ACCEPT_CONTENT = ['application/json']
+# CELERY_TASK_SERIALIZER = 'json'
+# CELERY_RESULT_SERIALIZER = 'json'
+# CELERY_TIMEZONE = 'UTC'
 
 # Spark post Email con figs
 
