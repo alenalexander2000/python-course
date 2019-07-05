@@ -23,9 +23,9 @@ from .base import *
 # djcelery.setup_loader()
 # BROKER_URL = 'django://'
 
-ROOT_URL = 'http://localhost:8000'
+ROOT_URL = 'ec2-13-232-164-134.ap-south-1.compute.amazonaws.com'
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+# ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
 DEBUG = True
 
@@ -33,8 +33,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'pythoncourse',
-        'USER': 'sooraj-dev',
-        'PASSWORD': 'deadpool',
+        'USER': 'pythoncourse',
+        'PASSWORD': 'pythoncourse',
         'PORT': '5432',
         'HOST': 'localhost'
     }
