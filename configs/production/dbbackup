@@ -1,0 +1,13 @@
+#!/bin/bash
+
+export AWS_ACCESS_KEY_ID=AKIAJA2KTS7EBPCF47TA
+export AWS_SECRET_ACCESS_KEY=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
+BUCKET=cied-db-backups
+
+sudo -u postgres pg_dump -Fc auditordeskuebt> ~/backup
+gzip ~/backup
+S3_KEY=$BUCKET/backups/uebt/$(date "+%Y-%m-%d-%H-%M-%S")-backup.gz
+aws s3 cp backup.gz s3://$S3_KEY
+
+rm -f backup.gz
+
